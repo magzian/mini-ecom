@@ -1,10 +1,10 @@
+// In your main.go
 package main
 
 import (
 	"backend/models"
 	"backend/routes"
 	"backend/utils"
-	"fmt"
 	"log"
 	"os"
 
@@ -20,16 +20,22 @@ func main() {
 	db.AutoMigrate(&models.User{}, &models.Product{}, &models.Order{})
 
 	app := fiber.New()
-	app.Use(cors.New())
 
+	// Configure CORS for Vue.js frontend
+	app.Use(cors.New(cors.Config{
+		AllowOrigins:     "http://localhost:5173", // Vue dev server default port
+		AllowMethods:     "GET,POST,HEAD,PUT,DELETE,PATCH,OPTIONS",
+		AllowHeaders:     "Origin,Content-Type,Accept,Authorization",
+		AllowCredentials: true,
+	}))
+
+	// Database middleware
 	app.Use(func(c *fiber.Ctx) error {
 		c.Locals("db", db)
 		return c.Next()
 	})
 
-	fmt.Println("About to call routes.Setup()")
 	routes.Setup(app)
-	fmt.Println("routes.Setup() completed")
 
 	port := os.Getenv("PORT")
 	if port == "" {
