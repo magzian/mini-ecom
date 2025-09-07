@@ -2,7 +2,6 @@ package routes
 
 import (
 	"backend/controllers"
-	"fmt"
 
 	"github.com/gofiber/fiber/v2"
 )
@@ -18,18 +17,15 @@ import (
 } */
 
 func Setup(app *fiber.App) {
-	fmt.Println("Inside Setup function - registering routes...") // ADD THIS
-
-	app.Post("/api/test-register", func(c *fiber.Ctx) error {
-		fmt.Println("Test register route hit!") // ADD THIS
-		return c.JSON(fiber.Map{"message": "Test register route works"})
-	})
 
 	app.Post("/api/login", controllers.Login)
 	app.Post("/api/register", controllers.Register)
 
-	fmt.Println("Routes registered:")
-	fmt.Println("- POST /api/login")
-	fmt.Println("- POST /api/register")
-	fmt.Println("- POST /api/test-register") // ADD THIS
+	//product routes
+	app.Post("/api/products", controllers.CreateProduct)
+	app.Get("/api/product/:id", controllers.ViewProduct)
+	app.Get("/api/products/", controllers.ViewAllProducts)
+	app.Put("/api/products/:id", controllers.UpdateProduct)
+	app.Delete("/api/products/:id", controllers.DeleteProduct)
+
 }

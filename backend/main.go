@@ -1,4 +1,3 @@
-// In your main.go
 package main
 
 import (
@@ -23,7 +22,7 @@ func main() {
 
 	// Configure CORS for Vue.js frontend
 	app.Use(cors.New(cors.Config{
-		AllowOrigins:     "http://localhost:5173", // Vue dev server default port
+		AllowOrigins:     "http://localhost:5173",
 		AllowMethods:     "GET,POST,HEAD,PUT,DELETE,PATCH,OPTIONS",
 		AllowHeaders:     "Origin,Content-Type,Accept,Authorization",
 		AllowCredentials: true,
