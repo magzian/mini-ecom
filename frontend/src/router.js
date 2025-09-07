@@ -3,14 +3,24 @@ import LoginView from '../views/LoginView.vue';
 import RegisterView from '../views/RegisterView.vue';
 
 import { auth } from './stores/auth'
-import DashboardView from '../views/DashboardView.vue';
+
+import Welcome from '../views/Welcome.vue'
+import ProductView from '../views/User/ProductView.vue';
+import Product from '../views/Admin/Product.vue';
+import Dashboard from '../views/Admin/Dashboard.vue';
+import Order from '../views/Admin/Order.vue';
 
 
 
 const routes = [
+  { path:'/', component:Welcome },
   { path: '/login', component: LoginView },
   { path: '/register', component: RegisterView },
-  {  path:'/dashboard', component:DashboardView }
+  {  path:'/admin/dashboard', component:Dashboard },
+  {  path:'/product', component:ProductView },
+  { path:'/admin/dashboard/products', component:Product },
+  { path:'/admin/dashboard/orders', component:Order }
+  
 ];
 
 export default createRouter({
