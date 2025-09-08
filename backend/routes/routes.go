@@ -6,20 +6,11 @@ import (
 	"github.com/gofiber/fiber/v2"
 )
 
-/* func RegisterRoutes(r *mux.Router, db *gorm.DB) {
-	r.HandleFunc("/api/register", controllers.Register(db)).Methods("POST")
-	r.HandleFunc("/api/login", controllers.Login(db)).Methods("POST")
+func Setup(app *fiber.App, userController *controllers.UserController) {
 
-	api := r.PathPrefix("/api").Subrouter()
-	api.HandleFunc("/products", controllers.ListProducts(db)).Methods("GET")
-	api.HandleFunc("/orders", controllers.CreateOrder(db)).Methods("POST")
-	api.Use(middleware.JWTAuth)
-} */
-
-func Setup(app *fiber.App) {
-
-	app.Post("/api/login", controllers.Login)
-	app.Post("/api/register", controllers.Register)
+	app.Post("/api/signup", userController.CreateUser)
+	app.Post("/api/add-permission", userController.AddPermission)
+	app.Post("/api/login", userController.Login)
 
 	//product routes
 	app.Post("/api/products", controllers.CreateProduct)

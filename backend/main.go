@@ -1,9 +1,11 @@
 package main
 
 import (
+	"backend/controllers"
 	"backend/models"
 	"backend/routes"
 	"backend/utils"
+	"context"
 	"log"
 	"os"
 
@@ -12,11 +14,17 @@ import (
 )
 
 func main() {
+	// Connect to database
 	db, err := utils.ConnectDatabase()
 	if err != nil {
 		log.Fatal("Failed to connect to database:", err)
 	}
+
+	// Run migrations
 	db.AutoMigrate(&models.User{}, &models.Permissions{}, &models.Product{}, &models.Order{})
+
+	// Create controller with the database instance directly (not the global variable)
+	userController := controllers.NewUserController(db, context.Background(), utils.RedisClient)
 
 	app := fiber.New()
 
@@ -34,7 +42,7 @@ func main() {
 		return c.Next()
 	})
 
-	routes.Setup(app)
+	routes.Setup(app, userController)
 
 	port := os.Getenv("PORT")
 	if port == "" {
@@ -42,5 +50,5 @@ func main() {
 	}
 
 	log.Println("Server starting on :" + port)
-	app.Listen(":3000")
+	app.Listen(":" + port)
 }

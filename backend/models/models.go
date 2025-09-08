@@ -15,10 +15,11 @@ type User struct {
 
 type Permissions struct {
 	ID        uint `json:"id" gorm:"primaryKey;autoIncrement"`
-	UserID    uint `json:"user_id" gorm:"not null"`
+	UserID    uint `json:"user_id" gorm:"not null;index"`
 	Entry     int  `json:"entry"`
 	AddFlag   bool `json:"add_flag" gorm:"default:false"`
 	AdminFlag bool `json:"admin_flag" gorm:"default:false"`
+	User      User `json:"-" gorm:"foreignKey:UserID"`
 }
 
 type Product struct {
