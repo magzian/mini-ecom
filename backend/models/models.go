@@ -1,21 +1,42 @@
 package models
 
+import (
+	"time"
+)
+
 type User struct {
-	ID       uint   `json:"id" gorm:"type:INT(10) UNSIGNED NOT NULL AUTO_INCREMENT;primaryKey"`
-	Username string `json:"username" gorm:"unique"`
-	Password string `json:"password" gorm:"not null" `
+	ID          uint          `json:"id" gorm:"primaryKey;autoIncrement"`
+	Username    string        `json:"username" gorm:"unique;not null"`
+	Password    string        `json:"password" gorm:"not null"`
+	Permissions []Permissions `json:"permissions" gorm:"foreignKey:UserID"`
+	CreatedAt   time.Time     `json:"created_at" gorm:"autoCreateTime"`
+	UpdatedAt   time.Time     `json:"updated_at" gorm:"autoUpdateTime"`
+}
+
+type Permissions struct {
+	/* ID        uint `json:"id" gorm:"primaryKey;autoIncrement"`
+	UserID    uint `json:"user_id" gorm:"not null"` */
+	Entry     int  `json:"entry"`
+	AddFlag   bool `json:"add_flag" gorm:"default:false"`
+	AdminFlag bool `json:"admin_flag" gorm:"default:false"`
 }
 
 type Product struct {
-	ID          string  `json:"id" gorm:"primaryKey"`
-	Name        string  `json:"name"`
-	Description string  `json:"description"`
-	Price       float64 `json:"price"`
+	ID          string    `json:"id" gorm:"primaryKey"`
+	Name        string    `json:"name" gorm:"not null"`
+	Description string    `json:"description"`
+	Price       float64   `json:"price" gorm:"not null"`
+	CreatedAt   time.Time `json:"created_at" gorm:"autoCreateTime"`
+	UpdatedAt   time.Time `json:"updated_at" gorm:"autoUpdateTime"`
 }
 
 type Order struct {
-	ID        uint `json:"id" gorm:"primaryKey"`
-	UserID    uint `json:"user_id"`
-	ProductID uint `json:"product_id"`
-	Quantity  int  `json:"quantity"`
+	ID        uint      `json:"id" gorm:"primaryKey;autoIncrement"`
+	UserID    uint      `json:"user_id" gorm:"not null"`
+	ProductID uint      `json:"product_id" gorm:"not null"`
+	Quantity  int       `json:"quantity" gorm:"not null"`
+	User      User      `json:"user" gorm:"foreignKey:UserID"`
+	Product   Product   `json:"product" gorm:"foreignKey:ProductID"`
+	CreatedAt time.Time `json:"created_at" gorm:"autoCreateTime"`
+	UpdatedAt time.Time `json:"updated_at" gorm:"autoUpdateTime"`
 }
