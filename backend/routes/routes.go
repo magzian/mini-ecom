@@ -11,6 +11,7 @@ func Setup(app *fiber.App, userController *controllers.UserController) {
 	app.Post("/api/signup", userController.CreateUser)
 	app.Post("/api/add-permission", userController.AddPermission)
 	app.Post("/api/login", userController.Login)
+	app.Post("/adminTestRoute", userController.TestRoute)
 
 	//product routes
 	app.Post("/api/products", controllers.CreateProduct)

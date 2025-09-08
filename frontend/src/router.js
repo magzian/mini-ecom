@@ -9,11 +9,13 @@ import ProductView from '../views/User/ProductView.vue';
 import Product from '../views/Admin/Product.vue';
 import Dashboard from '../views/Admin/Dashboard.vue';
 import Order from '../views/Admin/Order.vue';
+import Home from '../views/User/Home.vue';
 
 
 
 const routes = [
   { path:'/', component:Welcome },
+  { path:'/dashboard', component:Home },
   { path: '/login', component: LoginView },
   { path: '/register', component: RegisterView },
   {  path:'/admin/dashboard', component:Dashboard },

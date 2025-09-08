@@ -137,3 +137,7 @@ func (uc *UserController) AddPermission(c *fiber.Ctx) error {
 
 	return c.JSON(fiber.Map{"message": "Success"})
 }
+
+func (uc *UserController) TestRoute(c *fiber.Ctx) error {
+	return c.SendString("Admin Test Route")
+}

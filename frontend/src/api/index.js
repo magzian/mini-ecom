@@ -45,7 +45,7 @@ export const authAPI = {
   // Register new user
   register: async (userData) => {
     try {
-      const response = await api.post('/register', userData)
+      const response = await api.post('/signup', userData)
       return response.data
     } catch (error) {
       throw error.response?.data || error.message
