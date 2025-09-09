@@ -1,6 +1,6 @@
 package controllers
 
-import (
+/* import (
 	"backend/models"
 	"encoding/json"
 	"net/http"
@@ -24,4 +24,4 @@ func CreateOrder(db *gorm.DB) http.HandlerFunc {
 		w.WriteHeader(http.StatusCreated)
 		json.NewEncoder(w).Encode(order)
 	}
-}
+} */

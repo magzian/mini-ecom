@@ -71,7 +71,7 @@ export const auth = defineStore('auth', {
         } else {
           throw new Error(response.message || 'Login failed')
         }
-      } catch (error) {
+      } catch (error) { 
         this.error = error.message || 'Login failed'
         throw error
       } finally {

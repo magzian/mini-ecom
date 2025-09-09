@@ -23,7 +23,7 @@ type Permissions struct {
 }
 
 type Product struct {
-	ID          string    `json:"id" gorm:"primaryKey"`
+	ID          int64     `json:"id" gorm:"primaryKey"`
 	Name        string    `json:"name" gorm:"not null"`
 	Description string    `json:"description"`
 	Price       float64   `json:"price" gorm:"not null"`
@@ -31,7 +31,7 @@ type Product struct {
 	UpdatedAt   time.Time `json:"updated_at" gorm:"autoUpdateTime"`
 }
 
-type Order struct {
+/* type Order struct {
 	ID        uint      `json:"id" gorm:"primaryKey;autoIncrement"`
 	UserID    uint      `json:"user_id" gorm:"not null"`
 	ProductID uint      `json:"product_id" gorm:"not null"`
@@ -41,3 +41,4 @@ type Order struct {
 	CreatedAt time.Time `json:"created_at" gorm:"autoCreateTime"`
 	UpdatedAt time.Time `json:"updated_at" gorm:"autoUpdateTime"`
 }
+*/

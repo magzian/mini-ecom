@@ -21,7 +21,7 @@ func main() {
 	}
 
 	// Run migrations
-	db.AutoMigrate(&models.User{}, &models.Permissions{}, &models.Product{}, &models.Order{})
+	db.AutoMigrate(&models.User{}, &models.Permissions{}, &models.Product{})
 
 	// Create controller with the database instance directly (not the global variable)
 	userController := controllers.NewUserController(db, context.Background(), utils.RedisClient)

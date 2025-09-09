@@ -66,7 +66,7 @@ export const authAPI = {
       }
       return response.data
     } catch (error) {
-      throw error.response?.data || error.message
+      throw error.response?.data || error.message 
     }
   },
 
@@ -98,6 +98,11 @@ export const authAPI = {
     return userData ? JSON.parse(userData) : null
   }
 }
+
+
+//product api
+
+
 
 // Export the main api instance for other API calls
 export default api
