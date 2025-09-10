@@ -10,6 +10,7 @@ import Product from '../views/Admin/Product.vue';
 import Dashboard from '../views/Admin/Dashboard.vue';
 import Order from '../views/Admin/Order.vue';
 import Home from '../views/User/Home.vue';
+import ProductView from '../views/User/ProductView.vue';
 
 
 
@@ -19,7 +20,7 @@ const routes = [
   { path: '/login', component: LoginView },
   { path: '/register', component: RegisterView },
   {  path:'/admin/dashboard', component:Dashboard },
-
+  { path:'/home/product/id' , component:ProductView },
   { path:'/admin/dashboard/products', component:Product },
   { path:'/admin/dashboard/orders', component:Order }
   
