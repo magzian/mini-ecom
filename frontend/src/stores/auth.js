@@ -31,26 +31,28 @@ export const auth = defineStore('auth', {
     },
 
     // Register new user
-    async register(userData) {
-      this.loading = true
-      this.error = null
-      
-      try {
-        const response = await authAPI.register(userData)
-        
-        if (response.success) {
-          // Optionally auto-login after registration
-          return response
-        } else {
-          throw new Error(response.message || 'Registration failed')
-        }
-      } catch (error) {
-        this.error = error.message || 'Registration failed'
-        throw error
-      } finally {
-        this.loading = false
-      }
-    },
+async register(userData) {
+  this.loading = true
+  this.error = null
+  
+  try {
+    const response = await authAPI.register(userData)
+    
+    console.log('Registration response:', response)
+    
+    // Fix: Check for the actual response structure
+    if (response.message === "Success") {
+      return response
+    } else {
+      throw new Error(response.message || 'Registration failed')
+    }
+  } catch (error) {
+    this.error = error.message || 'Registration failed'
+    throw error
+  } finally {
+    this.loading = false
+  }
+},
 
     // Login user
     async login(credentials) {
@@ -59,14 +61,17 @@ export const auth = defineStore('auth', {
       
       try {
         const response = await authAPI.login(credentials)
+
         
-        if (response.success && response.data.token) {
-          this.token = response.data.token
+        
+        if (response.token && response.user_id) {
+          this.token = response.token
           this.user = {
-            user_id: response.data.user_id,
-            username: response.data.username
+            user_id: response.user_id,
+            username: response.username
           }
           this.isAuthenticated = true
+          
           return response
         } else {
           throw new Error(response.message || 'Login failed')

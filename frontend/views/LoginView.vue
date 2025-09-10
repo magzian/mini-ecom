@@ -81,7 +81,8 @@ const handleLogin = async () => {
     })
     
     // Redirect to dashboard or home page
-    router.push('/dashboard')
+    router.push('/home')
+   
     
   } catch (error) {
     console.error('Login failed:', error)
